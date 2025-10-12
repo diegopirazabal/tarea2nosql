@@ -54,13 +54,13 @@ sequenceDiagram
 
 
 ## Ejecución con Docker Compose
-Utiliza `docker compose`. El archivo `docker-compose.yml` levanta MongoDB, Redis y el servicio de usuarios.
+El archivo `docker-compose.yml` levanta MongoDB, Redis y el servicio de usuarios.
 
 1. Construir y levantar:
    ```bash
    docker compose up --build
    ```
-   Esto expone los mismos puertos (`3001`, `27017`, `6379`) hacia la máquina anfitriona.
+   Esto expone los puertos (`3001`, `27017`, `6379`) hacia la maquina anfitriona.
 2. Verificar status:
    ```bash
    curl http://localhost:3001/health
@@ -100,7 +100,7 @@ Utiliza `docker compose`. El archivo `docker-compose.yml` levanta MongoDB, Redis
 ```bash
 curl -X POST http://localhost:3001/api/usuarios \
   -H "Content-Type: application/json" \
-  -d '{"tipo_doc":"DNI","nro_doc":"12345678","nombre":"Ada","apellido":"Lovelace","email":"ada@example.com","fecha_nac":"1990-01-05"}'
+  -d '{"tipo_doc":"DNI","nro_doc":"12345678","nombre":"Humberto","apellido":"Suazo","email":"ch.suazo@correo.com","fecha_nac":"1981-05-10"}'
 
 curl http://localhost:3001/api/usuarios/<ID_DEVUELTO>
 ```
