@@ -114,15 +114,15 @@ Utiliza `docker compose`. El archivo `docker-compose.yml` levanta MongoDB, Redis
 
 
 - `POST /api/usuarios`  
-  Crea un usuario con estos atributos obligatorios:
+  Crea un usuario. Ejemplo:
   ```json
   {
     "tipo_doc": "DNI",
     "nro_doc": "12345678",
-    "nombre": "Ada",
-    "apellido": "Lovelace",
-    "email": "ada@example.com",
-    "fecha_nac": "1990-01-05"
+    "nombre": "Carlos",
+    "apellido": "Tevez",
+    "email": "carlitos@tevez.com",
+    "fecha_nac": "1984-02-05"
   }
   ```
 - `GET /api/usuarios/{usuario_id}`  
