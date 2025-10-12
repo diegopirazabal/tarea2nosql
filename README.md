@@ -15,7 +15,7 @@ flowchart LR
   UsersService -->|Caché| Redis[(Redis)]
 ```
 
-## Flujo SAGA Planeado
+## Flujo SAGA
 ```mermaid
 stateDiagram-v2
   [*] --> SolicitudUsuario
@@ -28,7 +28,7 @@ stateDiagram-v2
   RevertirRegistro --> ExitoCompensacion
 ```
 
-## Chain of Responsibility Planeado
+## Chain of Responsibility
 ```mermaid
 sequenceDiagram
   participant API as API /api/usuarios
@@ -78,7 +78,6 @@ package.json
    - `MONGODB_URI`: cadena de conexión a MongoDB.
    - `REDIS_URL`: URL de Redis.
 3. **Arrancar MongoDB y Redis**  
-   Puedes usar instancias locales o contenedores rápidos:
    ```bash
    docker run -d --name eventflow-mongo -p 27017:27017 mongo:6
    docker run -d --name eventflow-redis -p 6379:6379 redis:7
@@ -87,20 +86,20 @@ package.json
    ```bash
    npm start
    ```
-5. **Verificar estado**
+5. **Verificar status**
    ```bash
    curl http://localhost:3001/health
    ```
 
 ## Ejecución con Docker Compose
-Si prefieres que las dependencias se levanten juntas, utiliza `docker compose`. El archivo `docker-compose.yml` levanta MongoDB, Redis y el servicio de usuarios.
+Utiliza `docker compose`. El archivo `docker-compose.yml` levanta MongoDB, Redis y el servicio de usuarios.
 
 1. Construir y levantar:
    ```bash
    docker compose up --build
    ```
    Esto expone los mismos puertos (`3001`, `27017`, `6379`) hacia la máquina anfitriona.
-2. Verificar salud:
+2. Verificar status:
    ```bash
    curl http://localhost:3001/health
    ```
@@ -129,10 +128,10 @@ Solo se desarrollaron los endpoints obligatorios del servicio de usuarios.
 
 ## Cómo probar los endpoints
 ### Con Postman
-1. Crear una colección nueva llamada `EventFlow Usuarios`.
-2. Añadir una petición `POST http://localhost:3001/api/usuarios` con body `raw` → `JSON` y el payload del ejemplo anterior.
+1. Crear una colección nueva.
+2. Añadir una petición `POST http://localhost:3001/api/usuarios` con body `raw` → `JSON`.
 3. Añadir una petición `GET http://localhost:3001/api/usuarios/{{usuario_id}}`.  
-   - Después de ejecutar el POST, copia el valor de `id` y guárdalo en una variable de entorno de la colección (`usuario_id`).
+   - Después de ejecutar el POST, copia el valor de `id` y guardalo en una variable de entorno de la colección (`usuario_id`).
 4. Ejecuta el GET; si repites la llamada observarás que la segunda respuesta puede contener `origen: "cache"` gracias a Redis.
 
 ### Con curl
@@ -144,4 +143,3 @@ curl -X POST http://localhost:3001/api/usuarios \
 curl http://localhost:3001/api/usuarios/<ID_DEVUELTO>
 ```
 
-> Próximos pasos: cuando incorporemos los servicios de eventos y reservas conectaremos la SAGA completa, el patrón Chain of Responsibility dentro del proceso de reservas y el orquestador que utilizará estos mismos componentes.
