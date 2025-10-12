@@ -100,7 +100,7 @@ El archivo `docker-compose.yml` levanta MongoDB, Redis y el servicio de usuarios
 ```bash
 curl -X POST http://localhost:3001/api/usuarios \
   -H "Content-Type: application/json" \
-  -d '{"tipo_doc":"DNI","nro_doc":"12345678","nombre":"Humberto","apellido":"Suazo","email":"ch.suazo@correo.com","fecha_nac":"1981-05-10"}'
+  -d '{"tipo_doc":"DNI","nro_doc":"22222222","nombre":"Humberto","apellido":"Suazo","email":"ch.suazo@correo.com","fecha_nac":"1981-05-10"}'
 
 curl http://localhost:3001/api/usuarios/<ID_DEVUELTO>
 ```
