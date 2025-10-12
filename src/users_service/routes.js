@@ -41,7 +41,7 @@ router.post("/usuarios", async (req, res, next) => {
       });
     }
 
-    const fechaNacDate = new Date(fecha_nac);
+    const fechaNac = new Date(fecha_nac);
 
     const user = await createUser({
       tipo_doc,
@@ -49,7 +49,7 @@ router.post("/usuarios", async (req, res, next) => {
       nombre,
       apellido,
       email,
-      fecha_nac: fechaNacDate,
+      fecha_nac: fechaNac,
     });
 
     await cacheUser(user);
