@@ -52,29 +52,6 @@ sequenceDiagram
   Cache-->>API: fin
 ```
 
-## Configuración y ejecución
-1. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-2. **Configurar variables de entorno**  
-   Copia `.env.example` a `.env` y ajusta valores si lo necesitas:
-   - `PORT`: puerto donde escuchará Express (3001 por defecto).
-   - `MONGODB_URI`: cadena de conexión a MongoDB.
-   - `REDIS_URL`: URL de Redis.
-3. **Arrancar MongoDB y Redis**  
-   ```bash
-   docker run -d --name eventflow-mongo -p 27017:27017 mongo:6
-   docker run -d --name eventflow-redis -p 6379:6379 redis:7
-   ```
-4. **Levantar el servicio**
-   ```bash
-   npm start
-   ```
-5. **Verificar status**
-   ```bash
-   curl http://localhost:3001/health
-   ```
 
 ## Ejecución con Docker Compose
 Utiliza `docker compose`. El archivo `docker-compose.yml` levanta MongoDB, Redis y el servicio de usuarios.
