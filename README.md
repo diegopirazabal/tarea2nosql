@@ -8,10 +8,15 @@
 
 ## Arquitectura Actual
 ```mermaid
-flowchart LR
-  Client[Cliente REST] -->|HTTP JSON| UsersService[Servicio de Usuarios (Express)]
-  UsersService -->|CRUD| MongoDB[(MongoDB)]
-  UsersService -->|Caché| Redis[(Redis)]
+graph LR
+  Client["Cliente REST"]
+  UsersService["Servicio de Usuarios (Express)"]
+  MongoDB[(MongoDB)]
+  Redis[(Redis)]
+
+  Client -->|HTTP JSON| UsersService
+  UsersService -->|CRUD| MongoDB
+  UsersService -->|Cache| Redis
 ```
 
 ## Flujo SAGA
@@ -59,8 +64,6 @@ src/
     config.js
     routes.js
     server.js
-docs/
-  Tarea2-NoSQL-2025-Buceo.pdf
 package.json
 .env.example
 .gitignore
@@ -141,4 +144,3 @@ curl -X POST http://localhost:3001/api/usuarios \
 
 curl http://localhost:3001/api/usuarios/<ID_DEVUELTO>
 ```
-
