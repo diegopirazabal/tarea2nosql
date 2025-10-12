@@ -1,13 +1,11 @@
 # EventFlow · Servicio de Usuarios
 
-> Reiniciamos el proyecto desde cero. En esta etapa solo existe el microservicio de usuarios implementado con Node.js y Express. La orquestación con Docker Compose y los otros microservicios llegará después.
 
 ## Justificación de Diseño
-- **Express y JavaScript simple:** la mínima cantidad de dependencias para que alguien principiante pueda seguir el flujo.
+- **Express y JavaScript:** Los integrantes conociamos las tecnologias, por lo que decidimos concentrarnos en aprender sobre bases NoSQL.
 - **Persistencia en MongoDB:** documentos por usuario, ideal para el esquema flexible que necesitamos y fácil de escalar en lecturas.
-- **Redis como segunda tecnología NoSQL:** caché de lecturas de usuarios para reducir carga de MongoDB y demostrar la combinación de bases de datos políglotas.
-- **Validación ligera en el controlador:** solo verificamos campos obligatorios y formatos básicos para mantener el código explicable.
-- **Separación de responsabilidades:** configuración, conexión a bases de datos, modelo y rutas se guardan en archivos pequeños y descriptivos.
+- **Redis como segunda tecnología NoSQL:** caché de lecturas de usuarios para reducir carga de MongoDB y demostrar la combinación de bases de datos.
+- **Validación ligera en el controlador:** solo verificamos campos obligatorios y formatos básicos.
 
 ## Arquitectura Actual
 ```mermaid
