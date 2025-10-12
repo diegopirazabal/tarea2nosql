@@ -5,7 +5,6 @@
 - **Express y JavaScript:** Los integrantes conociamos las tecnologias, por lo que decidimos concentrarnos en aprender sobre bases NoSQL.
 - **Persistencia en MongoDB:** documentos por usuario, ideal para el esquema flexible que necesitamos y fácil de escalar en lecturas.
 - **Redis como segunda tecnología NoSQL:** caché de lecturas de usuarios para reducir carga de MongoDB y mejorar tiempos de respuesta.
-- **Validación ligera en el controlador:** solo verificamos campos obligatorios y formatos básicos.
 
 ## Arquitectura Actual
 ```mermaid
