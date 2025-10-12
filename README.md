@@ -1,4 +1,8 @@
-# EventFlow · Servicio de Usuarios
+# EventFlow
+
+"EventFlow" es una empresa ficticia que gestiona la venta de entradas y la 
+organización de eventos. Para manejar el alto volumen de transacciones y 
+consultas, se ha optado por una arquitectura de microservicios. 
 
 
 ## Justificación de Diseño
