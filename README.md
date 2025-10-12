@@ -10,7 +10,7 @@ consultas, se ha optado por una arquitectura de microservicios.
 - **Persistencia en MongoDB:** documentos por usuario, ideal para el esquema flexible que necesitamos y fácil de escalar en lecturas.
 - **Redis como segunda tecnología NoSQL:** caché de lecturas de usuarios para reducir carga de MongoDB y mejorar tiempos de respuesta.
 
-## Arquitectura Actual
+## Arquitectura
 ```mermaid
 graph LR
   Client["Cliente REST"]
@@ -50,27 +50,6 @@ sequenceDiagram
   Duplicados->>Persistencia: procesar(solicitud)
   Persistencia->>Cache: procesar(nuevo usuario)
   Cache-->>API: fin
-```
-
-## Estructura de Carpetas
-```
-src/
-  users_service/
-    cache/
-      userCache.js
-    db/
-      mongo.js
-      redis.js
-    models/
-      userModel.js
-    repositories/
-      userRepository.js
-    config.js
-    routes.js
-    server.js
-package.json
-.env.example
-.gitignore
 ```
 
 ## Configuración y ejecución
