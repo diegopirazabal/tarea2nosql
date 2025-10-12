@@ -109,7 +109,7 @@ Utiliza `docker compose`. El archivo `docker-compose.yml` levanta MongoDB, Redis
    ```
 
 ## Endpoints implementados
-Solo se desarrollaron los endpoints obligatorios del servicio de usuarios.
+
 
 - `POST /api/usuarios`  
   Crea un usuario con estos atributos obligatorios:
