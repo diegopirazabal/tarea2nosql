@@ -1,6 +1,6 @@
 import { getRedisClient } from "../db/redis.js";
 
-const TTL_SECONDS = 60;
+const TTL_SECONDS = 600;
 
 export async function cacheUser(user) {
   if (!user || !user.id) {
