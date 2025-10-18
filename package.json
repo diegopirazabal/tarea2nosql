@@ -5,7 +5,9 @@
   "main": "src/users_service/server.js",
   "type": "module",
   "scripts": {
-    "start": "node src/users_service/server.js"
+    "start": "node src/users_service/server.js",
+    "start:users": "node src/users_service/server.js",
+    "start:events": "node src/events_service/server.js"
   },
   "keywords": [
     "users",

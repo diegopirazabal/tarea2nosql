@@ -28,5 +28,18 @@ services:
       - "3001:3001"
     restart: unless-stopped
 
+  events-service:
+    build: .
+    container_name: eventflow-events
+    depends_on:
+      - mongo
+    environment:
+      - PORT=3002
+      - EVENTS_MONGODB_URI=mongodb://mongo:27017/eventflow_events_service
+    command: ["npm", "run", "start:events"]
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
+
 volumes:
   mongo_data:

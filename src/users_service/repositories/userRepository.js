@@ -23,6 +23,11 @@ export async function findUserByDocument(tipo_doc, nro_doc) {
   return formatUser(user);
 }
 
+export async function findAllUsers() {
+  const users = await UserModel.find().lean({ getters: true });
+  return users.map((user) => formatUser(user));
+}
+
 function formatUser(user) {
   if (!user) {
     return null;
