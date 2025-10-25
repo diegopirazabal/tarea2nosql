@@ -24,6 +24,7 @@ services:
       - PORT=3001
       - MONGODB_URI=mongodb://mongo:27017/eventflow_users_service
       - REDIS_URL=redis://redis:6379
+      - ANON_SALT=change-me
     ports:
       - "3001:3001"
     restart: unless-stopped
@@ -39,6 +40,24 @@ services:
     command: ["npm", "run", "start:events"]
     ports:
       - "3002:3002"
+    restart: unless-stopped
+
+  reservations-service:
+    build: .
+    container_name: eventflow-reservations
+    depends_on:
+      - mongo
+      - users-service
+      - events-service
+    environment:
+      - PORT=3003
+      - RESERVATIONS_MONGODB_URI=mongodb://mongo:27017/eventflow_reservations_service
+      - USERS_BASE_URL=http://users-service:3001
+      - EVENTS_BASE_URL=http://events-service:3002
+      - PAYMENT_SUCCESS_RATE=0.7
+    command: ["npm", "run", "start:reservations"]
+    ports:
+      - "3003:3003"
     restart: unless-stopped
 
 volumes:

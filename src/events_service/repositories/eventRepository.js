@@ -15,6 +15,26 @@ export async function findEventById(eventId) {
   return formatEvent(event);
 }
 
+export async function reserveSeats(eventId, cantidad) {
+  const updated = await EventModel.findOneAndUpdate(
+    { _id: eventId, aforo_disponible: { $gte: cantidad } },
+    { $inc: { aforo_disponible: -cantidad } },
+    { new: true }
+  ).lean({ getters: true });
+  if (!updated) return null;
+  return formatEvent(updated);
+}
+
+export async function revertSeats(eventId, cantidad) {
+  const updated = await EventModel.findOneAndUpdate(
+    { _id: eventId },
+    { $inc: { aforo_disponible: cantidad } },
+    { new: true }
+  ).lean({ getters: true });
+  if (!updated) return null;
+  return formatEvent(updated);
+}
+
 function formatEvent(event) {
   if (!event) {
     return null;

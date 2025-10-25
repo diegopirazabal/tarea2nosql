@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { mongoose } from "./db/mongo.js";
-import { createEvent, findEventById } from "./repositories/eventRepository.js";
+import { createEvent, findEventById, reserveSeats, revertSeats } from "./repositories/eventRepository.js";
 
 const router = Router();
 
@@ -64,6 +64,56 @@ router.get("/eventos/:id", async (req, res, next) => {
     }
 
     return res.json(event);
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.post("/eventos/:id/reservar", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { cantidad } = req.body ?? {};
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "El identificador no es válido." });
+    }
+    const qty = numberOrNull(cantidad);
+    if (qty === null || qty <= 0) {
+      return res
+        .status(400)
+        .json({ error: "cantidad debe ser un número mayor a 0." });
+    }
+
+    const updated = await reserveSeats(id, qty);
+    if (!updated) {
+      return res.status(409).json({ error: "No hay aforo disponible suficiente." });
+    }
+    return res.json({ ok: true, evento: updated });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.post("/eventos/:id/revertir", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { cantidad } = req.body ?? {};
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "El identificador no es válido." });
+    }
+    const qty = numberOrNull(cantidad);
+    if (qty === null || qty <= 0) {
+      return res
+        .status(400)
+        .json({ error: "cantidad debe ser un número mayor a 0." });
+    }
+
+    const updated = await revertSeats(id, qty);
+    if (!updated) {
+      return res.status(404).json({ error: "Evento no encontrado." });
+    }
+    return res.json({ ok: true, evento: updated });
   } catch (error) {
     return next(error);
   }
