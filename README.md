@@ -56,7 +56,7 @@ stateDiagram-v2
 
 **Compensaciones ante fallos:**
 - Si no hay aforo suficiente, el orquestador detiene la SAGA, devuelve un `409` y no se genera reserva confirmada.
-- Si el cobro falla después de bloquear cupos, el orquestador libera el inventario (`releaseEventSeats`) y cancela la reserva, anotando el motivo en `notas_compensacion`.
+- Si el cobro falla después de bloquear cupos, el orquestador libera el inventario (`releaseEventSeats`) y cancela la reserva, anotando el motivo en el campo `notas_compensacion`.
 - Cualquier error posterior a la creación de la reserva deja un rastro consistente: cupos liberados y reserva en estado `cancelada`.
 
 ## Chain of Responsibility
@@ -121,7 +121,7 @@ El archivo `docker-compose.yml` levanta MongoDB, Redis y los tres microservicios
 ### Servicio de Eventos (`http://localhost:3002/api`)
 - `POST /eventos`  
   Registra un nuevo evento. Ejemplo:
-  ```json
+```json
   {
     "nombre": "Festival de Jazz",
     "descripcion": "Edición anual",
@@ -145,7 +145,7 @@ El archivo `docker-compose.yml` levanta MongoDB, Redis y los tres microservicios
     "metodo_pago": "tarjeta"
   }
   ```
-  Respuesta en el camino feliz:
+  Respuesta en transaccion exitosa
   ```json
   {
     "reserva": {
@@ -175,10 +175,9 @@ El archivo `docker-compose.yml` levanta MongoDB, Redis y los tres microservicios
 ## Cómo probar los endpoints
 ### Con Postman
 1. Crear una colección nueva.
-2. Añadir las peticiones necesarias para los servicios (usuarios `3001`, eventos `3002`, reservas `3003`) con body `raw` -> `JSON` donde aplique.
-3. Para `GET /api/usuarios/{usuario_id}` o `GET /api/eventos/{evento_id}`, reutiliza el `id` devuelto por la creación previa.
-4. Para probar `POST /api/reservas`, usa `usuario_id` y `evento_id` reales y ajusta `cantidad` y `metodo_pago`.
-5. Para descargar el CSV llama a `GET http://localhost:3001/api/usuarios/exportar` y Postman ofrecerá la descarga.
+2. Añadir las peticiones necesarias para los servicios (usuarios `3001`, eventos `3002`, reservas `3003`).
+3. Para `GET /api/usuarios/{usuario_id}` o `GET /api/eventos/{evento_id}`, usar un id devuelto en las transacciones anteriores.
+4. Para descargar el CSV llama a `GET http://localhost:3001/api/usuarios/exportar` y Postman ofrecerá la descarga.
 
 ### Con curl
 ```bash
