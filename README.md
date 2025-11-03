@@ -170,7 +170,7 @@ El archivo `docker-compose.yml` levanta MongoDB, Redis y los tres microservicios
     }
   }
   ```
-  Si el método de pago es rechazado (por ejemplo, `"metodo_pago":"rechazar"`), la API responde `402` y la reserva queda cancelada con el cupo restablecido.
+  Si el método de pago es rechazado (por ejemplo, `"metodo_pago":"rechazar"` o `"metodo_pago":"sin-fondos"`), la API responde `402`, libera el aforo reservado y deja la reserva en estado `cancelada` con `notas_compensacion` explicando el motivo.
 
 ## Cómo probar los endpoints
 ### Con Postman

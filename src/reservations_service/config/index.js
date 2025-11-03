@@ -3,7 +3,7 @@ export const config = {
   mongodbUri:
     process.env.RESERVATIONS_MONGODB_URI ?? process.env.EVENTS_MONGODB_URI ?? "",
   payment: {
-    acceptedMethods: ["tarjeta", "transferencia"],
+    acceptedMethods: ["tarjeta", "transferencia", "rechazar", "sin-fondos"],
   },
 };
 
