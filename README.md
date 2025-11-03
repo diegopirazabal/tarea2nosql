@@ -73,7 +73,7 @@ sequenceDiagram
   Pago-->>API: autorización completada
 ```
 
-Las validaciones aplicadas en la cadena son las mínimas necesarias para cumplir el requerimiento:
+
 - **Validador de datos:** asegura que `usuario_id`, `evento_id`, `cantidad` y `metodo_pago` existan, tengan formato correcto y que la cantidad de entradas sea un entero positivo.
 - **Validador de inventario:** verifica que el evento exista y que `aforo_disponible` sea suficiente para cubrir la cantidad solicitada antes de iniciar la SAGA.
 - **Procesador de pago:** valida que el método de pago esté soportado y que el gateway simulado autorice la operación antes de que el orquestador intente capturar el pago.
